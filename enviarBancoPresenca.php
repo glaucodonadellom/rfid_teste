@@ -15,36 +15,34 @@ foreach ($dados as $linha){
     echo"<br>";
     echo $card;
     echo"<br>";
-    $comandoSQL = "SELECT `idALuno_FK` FROM `card` WHERE 'card= $card'";
-
+    $comandoSQL = "SELECT `idCard`,`idALuno_FK` FROM `card` WHERE `card`=$card";
     $rs = mysqli_query($con, $comandoSQL) or die ("Erro " . mysqli_error($con));
     $linhas = mysqli_num_rows($rs);
+//    $dado = mysqli_fetch_array($rs);
 
     if ($linhas < 1) {
-        $comandoSQL = "INSERT INTO card(
-        card,
-        idAluno_FK
-        )values (
-        '$card',
-        '1'
-        )";
+        echo "SEM ID";
+        $comandoSQL = "INSERT INTO card(card,idAluno_FK)values ('$card','1')";
         mysqli_query($con, $comandoSQL)
         or die("Erro na inclusão do cartão: $card<br>" .
             mysqli_error($con) );
+        sleep ( 5 );
+        $comandoSQL = "SELECT `idCard`,`idALuno_FK` FROM `card` WHERE `card`=$card";
 
-        $comandoSQL = "INSERT INTO presenca (datapresenca,idcard_fk,idAluno_fk)values ('$data','$card','1')";
-        echo "SEM ID ALUNO";
-        var_dump($card);
-        var_dump($comandoSQL);
+        $rs = mysqli_query($con, $comandoSQL)
+        or die("Erro na inclusão do cartão: $card<br>" .
+            mysqli_error($con) );
 
-    }else{
-        $dado = mysqli_fetch_array($rs);
-        $idAluno_fk = $dado['idALuno_FK'];
-        var_dump($card);
-        $comandoSQL = "INSERT INTO presenca (idPresenca,datapresenca,idCard_fk,idAluno_fk)values ('0','$data','$card','$idAluno_fk');";
-        echo "COM ID ALUNO";
-        var_dump($comandoSQL);
-    }
+        }
+    var_dump($rs);
+    $dado = mysqli_fetch_array($rs);
+    $idAluno_fk = $dado['idALuno_FK'];
+    $idCard_fk = $dado['idCard'];
+    var_dump($idAluno_fk);
+    var_dump($idCard_fk);
+    $comandoSQL = "INSERT INTO presenca (`datapresenca`,`idCard_fk`,`idAluno_fk`)values ('$data','$idCard_fk','$idAluno_fk');";
+    echo "COM ID ALUNO";
+
     var_dump($comandoSQL);
     mysqli_query($con, $comandoSQL)
     or die("Erro na inclusão da presença: $card<br>" .

@@ -4,7 +4,7 @@ use RFID;
 CREATE TABLE `card` (
  
 `idCard` INT primary key AUTO_INCREMENT,
-`card` VARCHAR(50) NOT NULL ,
+`card` VARCHAR(50) NOT NULL UNIQUE,
 `idALuno_FK` INT NOT NULL 
 ) ENGINE = innodb;
  
@@ -35,6 +35,3 @@ INSERT INTO `card` (`idCard`, `card`, `idALuno_FK`) VALUES ('1', '11232151', '1'
 
 
 INSERT INTO `presenca` (`idPresenca`, `datapresenca`, `idCard_fk`, `idAluno_fk`) VALUES ('1', '18/09/2019 07:20', '1', '1'), ('2', '18/09/2019 07:22', '2', '2'),('3', '18/09/2019 07:21', '3', '3');
-
-INSERT INTO `presenca` (`datapresenca`, `idCard_fk`) VALUES ( '11/10/2019 07:20', '1'), ('11/10/2019 07:22', '2'),('11/10/2019 07:21', '3');
-
