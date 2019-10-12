@@ -12,10 +12,11 @@ include "cabecalho.php";
 //
 // $comandoSQL = "INSERT INTO presenca (datapreseca,idcard_fk,idAluno_FK)values ($date,$idcard_fk,$idAluino_FK )";
 ?>
-<form method="post" action="#">
+<form method="post" action="enviarBancoPresenca.php" enctype="multipart/form-data">
 	<input type="hidden" name="MAX_FILE_SIZE" value="4194304">
 
-	<input type="file" name="arquivo" id="arquivo">
+    <input type="file" name="Arquivo" id="Arquivo">
+
     <hr>
     <input type="submit" value="enviar">
 
