@@ -21,20 +21,7 @@ include_once "cabecalho.php"
          FROM presenca INNER JOIN alunop ON presenca.idAluno_fk = alunop.idAluno
           INNER JOIN card ON presenca.idCard_fk = card.idCard ";
 
-        // $comandoSQL = "SELECT presenca.idPresenca,presenca.datapresenca,presenca.idCard_fk,
-        // presenca.idAluno_fk,alunoP.* , card.* FROM presenca left outer join (select nome where presenca.idAluno_fk = alunoP.idAluno)
-        // left outer join (select card where presenca.idCard_fk = card.idCard)"
-
-         // $comandoSQL = "SELECT idPresenca,datapresenca,idCard_fk,idAluno_fk, nome, card
-         // FROM presenca, alunoP, card WHERE presenca.idAluno_fk = alunoP.idAluno AND
-         // presenca.idCard_fk = card.idCard";
-
-
-//        $comandoSQL = "SELECT idPresenca,datapresenca,idCard_fk,idAluno_fk FROM presenca";
-
         $rs = mysqli_query($con, $comandoSQL) or die ("Erro " . mysqli_error($con));
-
-
         $linhas = mysqli_num_rows($rs);
         if ($linhas < 1) die("tabela de <b> presença</b> esta vazia! :(");
 

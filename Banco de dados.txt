@@ -1,0 +1,40 @@
+create database RFID;
+use RFID;
+
+CREATE TABLE `card` (
+ 
+`idCard` INT primary key AUTO_INCREMENT,
+`card` VARCHAR(50) NOT NULL ,
+`idALuno_FK` INT NOT NULL 
+) ENGINE = innodb;
+ 
+CREATE TABLE `alunoP` (
+ 
+`idAluno` INT PRIMARY KEY AUTO_INCREMENT,
+`nome` VARCHAR( 50 ) NOT NULL	
+) ENGINE = innodb;
+ 
+CREATE TABLE `presenca` (
+ 
+`idPresenca` INT PRIMARY KEY AUTO_INCREMENT,
+`datapresenca` Varchar(16) NOT NULL,
+`idCard_fk` INT,
+`idAluno_fk` INT
+) ENGINE = innodb;
+
+
+ALTER TABLE `card` ADD CONSTRAINT `fk_aluno` FOREIGN KEY ( `idAluno_FK` ) REFERENCES `alunoP` ( `idAluno` ) ;
+
+ALTER TABLE `presenca` ADD CONSTRAINT `fk_card_presente` FOREIGN KEY ( `idCard_fk` ) REFERENCES `card` ( `idCard` ) ;
+ALTER TABLE `presenca` ADD CONSTRAINT `fk_aluno_presente` FOREIGN KEY ( `idAluno_fk` ) REFERENCES `alunoP` ( `idAluno` ) ;
+
+
+INSERT INTO `alunop` (`idAluno`, `nome`) VALUES ('1', 'Cartão não cadastrado'), ('2', 'miguel'),('3','glauco'),('4','alan');
+
+INSERT INTO `card` (`idCard`, `card`, `idALuno_FK`) VALUES ('1', '11232151', '1'),('2', '1223151', '2'),('3', '123451', '3');
+
+
+INSERT INTO `presenca` (`idPresenca`, `datapresenca`, `idCard_fk`, `idAluno_fk`) VALUES ('1', '18/09/2019 07:20', '1', '1'), ('2', '18/09/2019 07:22', '2', '2'),('3', '18/09/2019 07:21', '3', '3');
+
+INSERT INTO `presenca` (`datapresenca`, `idCard_fk`) VALUES ( '11/10/2019 07:20', '1'), ('11/10/2019 07:22', '2'),('11/10/2019 07:21', '3');
+
